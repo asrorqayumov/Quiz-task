@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import Fade from "react-reveal/Fade";
 import "./style.css";
 import { Button } from "./../../components/Button";
+import FadeAnimation from "react-fade-animation";
 
 const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export const Count = () => {
-  const [number, setNumber] = useState(null);
+  const [number, setNumber] = useState("");
 
   return (
     <div className="HomeContainer">
       <div className="header header-count">
-        <Fade right className="fade">
+        <FadeAnimation duration={1.1} startDistance={350} from={"right"}>
           <p className="title">To'liq o'nlikni ajrating va sharlarni sanang</p>
           <p className="subTitle">Sharlarni sanang va ular sonini yozing</p>
-        </Fade>
+        </FadeAnimation>
       </div>
 
       <div className="HomeWrapper">
@@ -46,13 +46,20 @@ export const Count = () => {
       </div>
 
       <div className="inputwrapper">
-        <input type="number" onChange={(e)=>setNumber(e.target.value)} value={number} />
-        <input type="number" />
+        <label htmlFor="" className="label">
+          <input
+            type="number"
+            onChange={(e) => setNumber(e.target.value)}
+            value={number}
+            className="input"
+          />
+          <input type="number" className="input" />
+        </label>
       </div>
 
       <div className="optionContainer">
         {arr.map((number) => {
-          return <Button  key={number} setNumber={setNumber} value={number} />;
+          return <Button key={number} setNumber={setNumber} value={number} />;
         })}
       </div>
     </div>

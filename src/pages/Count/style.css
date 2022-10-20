@@ -30,3 +30,29 @@
 .ml-36 {
   margin-left: 36px;
 }
+
+.inputwrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    max-width: 50px;
+}
+
+.label{
+    border: 5px solid #CFCECE;
+    border-radius: 8px;
+}
+.input{
+    border: none;
+    outline: none;
+    width: 12px;
+    height:20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.border-red{
+    border: 5px solid #ED696A ;
+} 
+

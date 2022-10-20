@@ -1,20 +1,21 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import Img1 from "../../images/flower1.png";
 import Img2 from "../../images/flower2.jpg";
 import Img3 from "../../images/flower3.jpg";
 import "./style.css";
+import FadeAnimation from "react-fade-animation";
+
 
 export const Home = () => {
   return (
     <div className="HomeContainer">
       <div className="header">
-        <Fade right className='fade'>
+      <FadeAnimation duration={1.1} startDistance={300} from={"right"}>
           <p className="title">
             Rasmlarni taqqoslang va ular orasiga teng "=" yoki teng emas "&ne;"
             belgisini to'g'ri joylashtiring
           </p>
-        </Fade>
+          </FadeAnimation >
       </div>
 
       <div className="HomeWrapper">
