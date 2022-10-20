@@ -1,0 +1,32 @@
+.subTitle {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.circle-purple {
+  background: linear-gradient(
+    to left,
+    rgba(100, 19, 100, 0.822),
+    rgba(100, 19, 100, 0.35)
+  );
+}
+.circle-yellow {
+  background-color: red;
+  background: linear-gradient(to left, #d59203, #fff172);
+}
+
+.d-flex {
+  display: flex;
+}
+.mr-60 {
+  margin-right: 60px;
+}
+.ml-36 {
+  margin-left: 36px;
+}

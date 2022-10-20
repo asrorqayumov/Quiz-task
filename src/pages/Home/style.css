@@ -1,0 +1,47 @@
+.HomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.HomeWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.testHomeWrapper {
+  display: flex;
+  align-items: center;
+}
+.testHomeWrapper:first-of-type {
+  margin-right: 60px;
+}
+
+.image-test {
+  width: 180px;
+  border-radius: 30px;
+}
+
+.oneImage {
+  border: 3px solid rgba(104, 201, 104, 0.426);
+}
+.twoImage {
+  border: 3px solid rgba(128, 0, 128, 0.214);
+}
+
+.rectangle {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #59c2e2;
+  margin: 0px 10px 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+.optionContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
