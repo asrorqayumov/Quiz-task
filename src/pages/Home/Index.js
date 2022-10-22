@@ -5,20 +5,19 @@ import Img3 from "../../images/flower3.jpg";
 import "./style.css";
 import FadeAnimation from "react-fade-animation";
 
-
 export const Home = () => {
   return (
     <div className="HomeContainer">
       <div className="header">
-      <FadeAnimation duration={1.1} startDistance={300} from={"right"}>
+        <FadeAnimation duration={1.1} startDistance={300} from={"right"}>
           <p className="title">
             Rasmlarni taqqoslang va ular orasiga teng "=" yoki teng emas "&ne;"
             belgisini to'g'ri joylashtiring
           </p>
-          </FadeAnimation >
+        </FadeAnimation>
       </div>
 
-      <div className="HomeWrapper">
+      <div className="HomeWrapper p-30">
         <div className="testHomeWrapper">
           <img src={Img1} alt="" className="image-test oneImage" />
           <span className="rectangle"></span>

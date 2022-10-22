@@ -1,8 +1,11 @@
 body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .container {
@@ -22,7 +25,7 @@ body {
   text-align: center;
   max-width: 100%;
 }
-.header-count{
+.header-count {
   padding: 0px;
 }
 
@@ -45,12 +48,12 @@ body {
   border-radius: 5px;
   color: black;
 }
-.link:hover{
+.link:hover {
   background-color: #59c2e2;
   color: #fff;
 }
 
-.link:first-of-type{
+.link:first-of-type {
   margin-right: 20px;
 }
 
@@ -58,4 +61,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.red-circle {
+  border: 1px solid red;
+  border-radius: 50%;
 }
