@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import "./style.css";
 import { Button } from "./../../components/Button";
 import FadeAnimation from "react-fade-animation";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
-const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const trueValue = [1, 3];
 
 export const Count = () => {
@@ -27,16 +28,33 @@ export const Count = () => {
     }
   };
 
+  if (firstNumber === trueValue[0] && secondNumber === trueValue[1]) {
+    return (
+      <div className="correct-wrapper">
+        <p>Ajoyib</p>
+      </div>
+    );
+  }
   return (
     <div className="HomeContainer">
       <div className="header header-count">
         <FadeAnimation duration={1.1} startDistance={350} from={"right"}>
-          <p className="title">
-            To'liq o'nlikni ajrating va sharlarni sanang
-          </p>
-          <p className="subTitle">
-            {!(firstNumber || firstNumber === 0) && <span>Sharlarni sanang va ular sonini yozing</span>}
-            </p>
+          <div className="title d-flex">
+            <span className="icon-sound">
+              <VolumeUpIcon />
+            </span>
+            <p> To'liq o'nlikni ajrating va sharlarni sanang</p>
+          </div>
+          <div className="subTitle d-flex">
+            {!(firstNumber || firstNumber === 0) && (
+              <>
+                <span className="icon-sound">
+                  <VolumeUpIcon />
+                </span>
+                <span>Sharlarni sanang va ular sonini yozing</span>
+              </>
+            )}
+          </div>
         </FadeAnimation>
       </div>
 
@@ -104,7 +122,7 @@ export const Count = () => {
       </div>
 
       <div className="optionContainer">
-        {arr.map((number) => {
+        {list.map((number) => {
           return (
             <Button key={number} setNumber={inputHandler} value={number} />
           );
