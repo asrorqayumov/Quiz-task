@@ -17,11 +17,11 @@ body {
 .app {
   max-width: 960px;
   max-height: 540px;
+  user-select: none;
 }
 
 .header {
   height: 150px;
-  /* padding: 0px 5px 10px 5px; */
   text-align: center;
   max-width: 100%;
 }

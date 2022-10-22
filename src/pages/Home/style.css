@@ -39,6 +39,9 @@
   align-items: center;
   font-size: 28px;
   font-weight: bold;
+  left: 0;
+  top: 0;
+  cursor: pointer;
 }
 .optionContainer {
   display: flex;
