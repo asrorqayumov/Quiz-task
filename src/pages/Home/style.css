@@ -9,6 +9,10 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.equal{
+  margin-bottom: 6px !important;
+}
 .testHomeWrapper {
   display: flex;
   align-items: center;

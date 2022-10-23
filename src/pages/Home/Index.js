@@ -5,53 +5,44 @@ import Img3 from "../../images/flower3.jpg";
 import FadeAnimation from "react-fade-animation";
 import { useDrag } from "react-use-gesture";
 import { useSpring, animated } from "react-spring";
-import { isFirstXRightPlace, isFirstYRightPlace } from "../../utils";
+import {
+  isFirstXRightPlace,
+  isFirstYRightPlace,
+  isSecondXRightPlace,
+  isSecondYRightPlace,
+} from "../../utils";
 import "./style.css";
 
 export const Home = () => {
-  const firstBox = useRef();
-  const secondBox = useRef();
-  const firstDraggingBox = useRef();
-  const secondDraggingBox = useRef();
-  const [firstBoxPos, setFirstBoxPos] = useState(0);
-  const [secondBoxPos, setSecondBoxPos] = useState(0);
-  const [firstDraggingBoxPos, setFirstDraggingBoxPos] = useState({
-    x: 0,
-    y: 0,
-  });
-  const [secondDraggingBoxPos, setSecondDraggingBoxPos] = useState({
-    x: 0,
-    y: 0,
-  });
-
-  const [firstImg, setFirstImg] = useState({x:false,y:false});
-  const [secondImg, setSecondImg] = useState({x:false,y:false});
+  const [firstImg, setFirstImg] = useState({ x: false, y: false });
+  const [secondImg, setSecondImg] = useState({ x: false, y: false });
 
   const [{ x, y }, first] = useSpring(() => ({ x: 0, y: 0 }));
+  const [{ x: sx, y: sy }, second] = useSpring(() => ({ x: 0, y: 0 }));
 
-
-  const bind = useDrag(
-    ({ down, initial, offset: [ox, oy], movement: [mx, my] }) => {
-      // console.log(ox, oy);
-      setFirstDraggingBoxPos({ x: initial[0], y: initial[1] });
+  const bindFirst = useDrag(
+    ({ down, offset: [ox, oy] }) => {
       first.start({
-         x:isFirstXRightPlace(ox,firstImg,setFirstImg),
-         y:isFirstYRightPlace(oy,firstImg,setFirstImg),
+        x: isFirstXRightPlace(ox, firstImg, setFirstImg),
+        y: isFirstYRightPlace(oy, firstImg, setFirstImg),
         immediate: down,
       });
     },
     { bounds: { left: -500, right: 500, top: -450, bottom: 100 } }
   );
 
-  //  console.log(firstDraggingBoxPos);
-  useEffect(() => {
-    setFirstBoxPos(firstBox.current.getBoundingClientRect());
-    setSecondBoxPos(secondBox.current.getBoundingClientRect());
-    // setFirstDraggingBoxPos(firstDraggingBox.current.getBoundingClientRect());
-    // setSecondDraggingBoxPos(secondDraggingBox.current.getBoundingClientRect());
-  }, []);
+  const bindSecond = useDrag(
+    ({ down, offset: [ox, oy] }) => {
+      second.start({
+        y: isSecondYRightPlace(oy, secondImg, setSecondImg),
+        x: isSecondXRightPlace(ox, secondImg, setSecondImg),
+        immediate: down,
+      });
+    },
+    { bounds: { left: -400, right: 400, top: -450, bottom: 100 } }
+  );
 
-  if (firstImg.x && firstImg.y && secondImg.x && secondImg.y)
+  if (firstImg.y && secondImg.x)
     return (
       <div className="correct-wrapper">
         <p>Ajoyib</p>
@@ -71,21 +62,20 @@ export const Home = () => {
       <div className="HomeWrapper p-30">
         <div className="testHomeWrapper">
           <img src={Img1} alt="" className="image-test oneImage" />
-          <span className="rectangle" ref={firstBox}></span>
+          <span className="rectangle equal"></span>
           <img src={Img1} alt="" className="image-test oneImage" />
         </div>
         <div className="testHomeWrapper">
           <img src={Img2} alt="" className="image-test twoImage" />
-          <span className="rectangle" ref={secondBox}></span>
+          <span className="rectangle"></span>
           <img src={Img3} alt="" className="image-test twoImage" />
         </div>
       </div>
 
       <div className="optionContainer">
         <animated.span
-          className="rectangle equal"
-          ref={firstDraggingBox}
-          {...bind()}
+          className="rectangle"
+          {...bindFirst()}
           style={{
             x,
             y,
@@ -93,9 +83,16 @@ export const Home = () => {
         >
           =
         </animated.span>
-        <span ref={secondDraggingBox} className="rectangle notequal">
+        <animated.span
+          className="rectangle"
+          {...bindSecond()}
+          style={{
+            x: sx,
+            y: sy,
+          }}
+        >
           &ne;
-        </span>
+        </animated.span>
       </div>
     </div>
   );
