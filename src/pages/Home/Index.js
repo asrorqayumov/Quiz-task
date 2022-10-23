@@ -2,65 +2,56 @@ import React, { useEffect, useRef, useState } from "react";
 import Img1 from "../../images/flower1.png";
 import Img2 from "../../images/flower2.jpg";
 import Img3 from "../../images/flower3.jpg";
-import "./style.css";
 import FadeAnimation from "react-fade-animation";
 import { useDrag } from "react-use-gesture";
 import { useSpring, animated } from "react-spring";
+import { isFirstXRightPlace, isFirstYRightPlace } from "../../utils";
+import "./style.css";
 
 export const Home = () => {
   const firstBox = useRef();
   const secondBox = useRef();
-  const [firstBoxRect, setFirstBoxRect] = useState(0);
-  const [secondBoxRect, setSecondBoxRect] = useState(0);
-  const [firstImg, setFirstImg] = useState(false);
-  const [secondImg, setSecondImg] = useState(false);
-  const firstItemPos = useSpring({ x: 0, y: 0 });
-  const secondItemPos = useSpring({ x: 0, y: 0 });
-
-  const bindFirstItemPos = useDrag((params) => {
-    const x = params.offset[0];
-    const y = params.offset[1];
-    firstItemPos.x.set(x);
-    firstItemPos.y.set(y);
-    if (x === firstBoxRect.x && y === firstBoxRect.y) {
-      setFirstImg(true);
-      console.log("bye");
-    } else {
-      console.log("hi");
-    }
+  const firstDraggingBox = useRef();
+  const secondDraggingBox = useRef();
+  const [firstBoxPos, setFirstBoxPos] = useState(0);
+  const [secondBoxPos, setSecondBoxPos] = useState(0);
+  const [firstDraggingBoxPos, setFirstDraggingBoxPos] = useState({
+    x: 0,
+    y: 0,
   });
+  const [secondDraggingBoxPos, setSecondDraggingBoxPos] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const [firstImg, setFirstImg] = useState({x:false,y:false});
+  const [secondImg, setSecondImg] = useState({x:false,y:false});
 
   const [{ x, y }, first] = useSpring(() => ({ x: 0, y: 0 }));
 
-  // const bind = useDrag(({ offset: [x, y] }) =>
-  //     first.start({ x, y, }),
-  //   {
-  //     bounds: { left: -500, right: 500, top: -450, bottom: 100 },
-  //     rubberband: true,
-  //     threshold: 10
-  //   }
-  // );
 
-  const bind = useDrag(({ down, movement: [mx, my], tap }) => {
-    console.log(tap);
-      if (tap) {
-        alert("tap!");
-        console.log(tap);
-      }
-      first.start({ x: down ? mx : 0, y: down ? my : 0 });
+  const bind = useDrag(
+    ({ down, initial, offset: [ox, oy], movement: [mx, my] }) => {
+      // console.log(ox, oy);
+      setFirstDraggingBoxPos({ x: initial[0], y: initial[1] });
+      first.start({
+         x:isFirstXRightPlace(ox,firstImg,setFirstImg),
+         y:isFirstYRightPlace(oy,firstImg,setFirstImg),
+        immediate: down,
+      });
     },
-    {
-      filterTaps: true,
-      bounds: { left: -500, right: 500, top: -450, bottom: 100 },
-    }
+    { bounds: { left: -500, right: 500, top: -450, bottom: 100 } }
   );
 
+  //  console.log(firstDraggingBoxPos);
   useEffect(() => {
-    setFirstBoxRect(firstBox.current.getBoundingClientRect());
-    setSecondBoxRect(secondBox.current.getBoundingClientRect());
+    setFirstBoxPos(firstBox.current.getBoundingClientRect());
+    setSecondBoxPos(secondBox.current.getBoundingClientRect());
+    // setFirstDraggingBoxPos(firstDraggingBox.current.getBoundingClientRect());
+    // setSecondDraggingBoxPos(secondDraggingBox.current.getBoundingClientRect());
   }, []);
 
-  if (firstImg && secondImg)
+  if (firstImg.x && firstImg.y && secondImg.x && secondImg.y)
     return (
       <div className="correct-wrapper">
         <p>Ajoyib</p>
@@ -93,6 +84,7 @@ export const Home = () => {
       <div className="optionContainer">
         <animated.span
           className="rectangle equal"
+          ref={firstDraggingBox}
           {...bind()}
           style={{
             x,
@@ -101,14 +93,7 @@ export const Home = () => {
         >
           =
         </animated.span>
-        <span
-          className="rectangle notequal"
-          style={{
-            position: "relative",
-            top: secondItemPos.y,
-            left: secondItemPos.x,
-          }}
-        >
+        <span ref={secondDraggingBox} className="rectangle notequal">
           &ne;
         </span>
       </div>

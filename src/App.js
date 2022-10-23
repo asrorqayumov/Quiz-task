@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { Count } from "./pages/Count/Index";
-import { Home } from "./pages/Home/Index";
+import { Home } from "./pages/Home/index";
 
 function App() {
   return (
